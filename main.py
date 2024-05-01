@@ -69,8 +69,6 @@ to_label.pack(pady=1)
 unit_combo1 = ttk.Combobox(root, value=[" "])
 unit_combo1.pack(pady=5)
 
-entry_label = tk.Label(root, text="Entry")
-entry_label.pack()
 user_input_box = tk.Entry(root)
 user_input_box.pack()
 
