@@ -1,11 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
+import collections
+
 # ***** Function to auto-select corect units for unit type selected *****
 def pick_option(e): # Event to bind to dropdown to select correct list
     if type_combo.get() == "Length":
-        unit_combo.config(value=length_units)
-        unit_combo1.config(value=length_units)
+        unit_combo.config(value=ordered_length.keys())
+        unit_combo1.config(value=ordered_length.keys())
     if type_combo.get() == "Time":
         unit_combo.config(value=time_units)
         unit_combo1.config(value=time_units)
@@ -22,7 +24,12 @@ def pick_option(e): # Event to bind to dropdown to select correct list
 #unfinished function for the calculation
 def calculation():
     value = user_input_box.get()
-    print("Text entry value:", value)
+    value = float(value)
+    if type_combo.get() == "Length":
+        scale_factor = length_units.get(unit_combo.get())/length_units.get(unit_combo1.get())
+        scale_factor = float(scale_factor)
+    value = value * scale_factor
+    print(value)
 
 def displaytext(x):
     #print(text.get(x))
@@ -56,8 +63,11 @@ example_label.pack(padx = 100, pady= 0)
 
 unit_types = ["Length", "Time", "Volume", "Pressure", "Energy"]
 
-length_units = ["Meter", "Centimeter", "Millimeter", "Micrometer", "Nanometer",
-                "Picometer", "Femtometer", "Attometer", "Angstrom"]
+length_units = {"Meter":1, "Centimeter":1e-2, "Millimeter":1e-3,
+                "Micrometer":1e-6, "Nanometer":1e-9,
+                "Picometer":1e-12, "Femtometer":1e-15,
+                "Attometer":1e-18, "Angstrom":1e-10}
+ordered_length = collections.OrderedDict(length_units)
 time_units = ["Second", "Millisecond", "Nanosecond", "Picosecond", "Femtosecond",
               "Minutes", "Hours"]
 vol_units = ["Cubic Centimeters", "Cubic Decimeters", "Cubic Meters",
@@ -65,7 +75,10 @@ vol_units = ["Cubic Centimeters", "Cubic Decimeters", "Cubic Meters",
 pressure_units = ["Pa", "kPa", "Atm", "Bar", "Torr", "PSI"]
 energy_units = ["Joules", "Kilojoules", "Kilocalories"]
 
-text = {"Length":"length text",
+text = {"Length":"Reference Lengths:\n\
+        Diameter of a hydrogen atom ≈ 106pm\n\
+        Circumference of a football ≈ 70cm\n\
+        Circumference of the earth ≈ 40,075m",
         "Time":"time text",
         "Volume":"volume text",
         "Pressure":"pressure text",
