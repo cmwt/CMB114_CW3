@@ -29,7 +29,7 @@ def calculation():
         scale_factor = length_units.get(unit_combo.get())/length_units.get(unit_combo1.get())
         scale_factor = float(scale_factor)
     value = value * scale_factor
-    print(value)
+    output.insert(0, value)
 
 def displaytext(x):
     #print(text.get(x))
@@ -37,15 +37,15 @@ def displaytext(x):
 # ***** Initiate Root Window + Labels *****
 
 root = tk.Tk()
-root.geometry("800x350")
+root.geometry("700x350")
 root.title("Scientific Unit Converter - CW3")
 
 ##code for the left frame
-leftframe = Frame(root, borderwidth = 2, relief = tk.GROOVE)
+leftframe = Frame(root)
 leftframe.pack(side = LEFT)
 ##code for the right frame
-rightframe = Frame(root, borderwidth = 2, relief = tk.GROOVE)
-rightframe.pack(side = RIGHT)
+rightframe = Frame(root)
+rightframe.pack(side = LEFT)
 
 
 intro = tk.Label(leftframe,text="Scientific Unit Converter")
@@ -106,6 +106,10 @@ entry_label.pack()
 user_input_box = tk.Entry(leftframe)
 user_input_box.pack()
 
+output = tk.Entry(rightframe)
+output.pack()
+
+
 def get_combo_coords():
     coords_of_combox, coords_of_comboy = unit_combo.winfo_x(), unit_combo.winfo_y()
     print("Combo 1 coordinates:", coords_of_combox, coords_of_comboy)
@@ -126,3 +130,4 @@ calculate = tk.Button(
 calculate.pack(pady=10)
 
 root.mainloop()
+
