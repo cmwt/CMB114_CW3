@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-import collections
+
 
 # ***** Function to auto-select corect units for unit type selected *****
 def pick_option(e): # Event to bind to dropdown to select correct list
     if type_combo.get() == "Length":
-        unit_combo.config(value=ordered_length.keys())
-        unit_combo1.config(value=ordered_length.keys())
+        unit_combo.config(values=list(length_units.keys()))
+        unit_combo1.config(values=list(length_units.keys()))
     if type_combo.get() == "Time":
         unit_combo.config(value=time_units)
         unit_combo1.config(value=time_units)
@@ -67,7 +67,6 @@ length_units = {"Meter":1, "Centimeter":1e-2, "Millimeter":1e-3,
                 "Micrometer":1e-6, "Nanometer":1e-9,
                 "Picometer":1e-12, "Femtometer":1e-15,
                 "Attometer":1e-18, "Angstrom":1e-10}
-ordered_length = collections.OrderedDict(length_units)
 time_units = ["Second", "Millisecond", "Nanosecond", "Picosecond", "Femtosecond",
               "Minutes", "Hours"]
 vol_units = ["Cubic Centimeters", "Cubic Decimeters", "Cubic Meters",
