@@ -72,7 +72,6 @@ root.title("Scientific Unit Converter - CW3")
 
 # Left frame
 leftframe = tk.Frame(root)
-#leftframe.config(row=3, column=9)
 leftframe.pack(side = LEFT)
 # Right frame
 rightframe = tk.Frame(root)
