@@ -27,25 +27,28 @@ def pick_option(e): # Event to bind to dropdown to select correct list
 
 # Calculation function to perform calculation and print answer to ouput entry
 def calculation():
-    value = user_input_box.get()
-    value = float(value)
-    if type_combo.get() == "Length":
-        scale_factor = length_units.get(unit_combo.get())/length_units.get(unit_combo1.get())
-        scale_factor = float(scale_factor)
-    if type_combo.get() == "Time":
-        scale_factor = time_units.get(unit_combo.get())/time_units.get(unit_combo1.get())
-        scale_factor = float(scale_factor)
-    if type_combo.get() == "Volume":
-        scale_factor = vol_units.get(unit_combo.get())/vol_units.get(unit_combo1.get())
-        scale_factor = float(scale_factor)
-    if type_combo.get() == "Pressure":
-        scale_factor = pressure_units.get(unit_combo.get())/pressure_units.get(unit_combo1.get())
-        scale_factor = float(scale_factor)
-    if type_combo.get() == "Energy":
-        scale_factor = energy_units.get(unit_combo.get())/energy_units.get(unit_combo1.get())
-        scale_factor = float(scale_factor)
-    value = value * scale_factor
-    output.insert(0, value)
+    try:
+        value = user_input_box.get()
+        value = float(value)
+        if type_combo.get() == "Length":
+            scale_factor = length_units.get(unit_combo.get())/length_units.get(unit_combo1.get())
+            scale_factor = float(scale_factor)
+        if type_combo.get() == "Time":
+            scale_factor = time_units.get(unit_combo.get())/time_units.get(unit_combo1.get())
+            scale_factor = float(scale_factor)
+        if type_combo.get() == "Volume":
+            scale_factor = vol_units.get(unit_combo.get())/vol_units.get(unit_combo1.get())
+            scale_factor = float(scale_factor)
+        if type_combo.get() == "Pressure":
+            scale_factor = pressure_units.get(unit_combo.get())/pressure_units.get(unit_combo1.get())
+            scale_factor = float(scale_factor)
+        if type_combo.get() == "Energy":
+            scale_factor = energy_units.get(unit_combo.get())/energy_units.get(unit_combo1.get())
+            scale_factor = float(scale_factor)
+        value = value * scale_factor
+        output.insert(0, value)
+    except ValueError:
+        output.insert(0, "Invalid. Enter a number.")
 
 # Prints reference text to a label above output entry
 def displaytext(x):
@@ -84,7 +87,7 @@ intro.grid(row=1, column=2)
 type_label = tk.Label(leftframe,text="Select a unit type")
 type_label.grid(row=2, column = 2)
 
-##exaple text for the right frame
+# Example text for the right frame
 example_label = tk.Label(rightframe)
 example_label.pack(padx = 100, pady= 0)
 
@@ -109,7 +112,10 @@ text = {"Length":"Reference Lengths:\n\
         Diameter of a hydrogen atom ≈ 106pm\n\
         Circumference of a football ≈ 70cm\n\
         Circumference of the earth ≈ 40,075m",
-        "Time":"time text",
+        "Time":"Reference Times:\n\
+        Blink of an eye ≈ 100ms\n\
+        Time taken for light to travel from the Sun to the Earth ≈ 500s\n\
+        Half life of uranium 235 ≈ 7e8 years\n",
         "Volume":"volume text",
         "Pressure":"pressure text",
         "Energy":"energy text"}
@@ -133,7 +139,7 @@ to_label.grid(row=5, column=3)
 unit_combo1 = ttk.Combobox(leftframe, value=[" "])
 unit_combo1.grid(row=6, column = 3)
 
-entry_label = tk.Label(leftframe, text="Entry")
+entry_label = tk.Label(leftframe, text="Enter a number")
 entry_label.grid(row=7, column=2)
 user_input_box = tk.Entry(leftframe)
 user_input_box.grid(row=8, column=2)
