@@ -70,19 +70,19 @@ def get_combo_coords():
 # *** Initiate Root Window + Labels ***
 
 root = tk.Tk()
-root.geometry("900x350")
+root.geometry("600x400")
 root.title("Scientific Unit Converter - CW3")
 
 # Left frame
 leftframe = tk.Frame(root)
-leftframe.pack(side = LEFT)
+leftframe.pack(side = TOP)
 # Right frame
 rightframe = tk.Frame(root)
-rightframe.pack(side = LEFT)
+rightframe.pack(side = TOP, pady=20)
 
 
 intro = tk.Label(leftframe,text="Scientific Unit Converter")
-intro.grid(row=1, column=2)
+intro.grid(row=1, column=2, pady=10)
 
 type_label = tk.Label(leftframe,text="Select a unit type")
 type_label.grid(row=2, column = 2)
@@ -111,7 +111,7 @@ energy_units = {"Joules":1, "Kilojoules":1e3, "Kilocalories":4184}
 text = {"Length":"Reference Lengths:\n\
         Diameter of a hydrogen atom ≈ 106pm\n\
         Circumference of a football ≈ 70cm\n\
-        Circumference of the earth ≈ 40,075m",
+        Circumference of the earth ≈ 40,075km",
         "Time":"Reference Times:\n\
         Blink of an eye ≈ 100ms\n\
         Time taken for light to travel from the Sun to the Earth ≈ 500s\n\
@@ -127,7 +127,7 @@ type_combo.grid(row=3, column=2)
 type_combo.bind("<<ComboboxSelected>>", pick_option)
 unit_label = tk.Label(leftframe, 
     text="Select the units between which you would \nlike to convert.")
-unit_label.grid(row=4, column=2)
+unit_label.grid(row=4, column=2, pady=5)
 
 from_label = tk.Label(leftframe, text="From:")
 from_label.grid(row=5, column=1)
@@ -161,6 +161,6 @@ calculate = tk.Button(
     height="2",
     command=lambda:[calculation(), displaytext(type_combo.get())]
 )
-calculate.grid(row=9, column=2)
+calculate.grid(row=9, column=2, pady=5)
 
 root.mainloop()
