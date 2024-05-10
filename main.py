@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-
+from lib.units import *
 
 # *** Defining functions ***
 
@@ -66,7 +66,7 @@ def get_combo_coords():
 
     # Place the entry box relative to the combo box
     user_input_box.place(leftframe, x=coords_of_combox - 75, y=coords_of_comboy, width=50, height=20)
- 
+
 # *** Initiate Root Window + Labels ***
 
 root = tk.Tk()
@@ -90,23 +90,6 @@ type_label.grid(row=2, column = 2)
 # Example text for the right frame
 example_label = tk.Label(rightframe)
 example_label.pack(padx = 100, pady= 0)
-
-# *** Set Lists for Dropdowns ***
-
-# Creating lists of units for their respecitve measure
-
-unit_types = ["Length", "Time", "Volume", "Pressure", "Energy"]
-
-length_units = {"Meter":1, "Centimeter":1e-2, "Millimeter":1e-3,
-                "Micrometer":1e-6, "Nanometer":1e-9,
-                "Picometer":1e-12, "Femtometer":1e-15,
-                "Attometer":1e-18, "Angstrom":1e-10}
-time_units = {"Second":1, "Millisecond":1e-3, "Nanosecond":1e-9, "Picosecond":1e-12, "Femtosecond":1e-15,
-              "Minutes":60, "Hours":3600}
-vol_units = {"Cubic Centimeters": 1, "Cubic Decimeters": 1e3, "Cubic Meters": 1e6,
-             "Millilitres": 1, "Centilitres": 10, "Litres": 1e3}
-pressure_units = {"Pa":1, "kPa":1e3, "Atm":101325, "Bar":1e5, "Torr":133.322, "PSI":6894.76}
-energy_units = {"Joules":1, "Kilojoules":1e3, "Kilocalories":4184}
 
 text = {"Length":"Reference Lengths:\n\
         Diameter of a hydrogen atom ≈ 106pm\n\
