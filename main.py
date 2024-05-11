@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from lib.units import *
+from lib.quantum import *
 
 # *** Defining functions ***
 
