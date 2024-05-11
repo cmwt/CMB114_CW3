@@ -1,4 +1,5 @@
 from lib.units import *
+from lib.quantum import *
 
 def opening_options():
     print("Welcome User to the CLI Unit Converter\n\
