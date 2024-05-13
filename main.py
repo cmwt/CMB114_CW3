@@ -151,7 +151,7 @@ text = {"Length":"Reference Lengths:\n\
 # *  Setting out the "Quantum Calculator" tab  *
 # *                                            *
 # **********************************************
-
+global calculation_label
 properties_label = tk.Label(tabframe2, text="Please select a property type and input its corresponding\n"
                             "value in SI units.")
 properties_label.pack(pady=10)
@@ -162,9 +162,11 @@ property_combo.pack(pady=10)
 property_input = tk.Entry(tabframe2)
 property_input.pack(pady=10)
 
+calculation_label = tk.Label(tabframe2, text="")
+calculation_label.pack(pady=10)
 quant_calculate = tk.Button(tabframe2,
                             text="Calculate",
-                            command=lambda:[])
+                            command=lambda: [quantum_calc(property_input.get(), property_combo.get()), configure_label(calculation_label)])
 quant_calculate.pack(pady=10)
 
 root.mainloop()
