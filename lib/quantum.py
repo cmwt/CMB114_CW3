@@ -1,12 +1,13 @@
 # In this file, all of the constants that are required
 # for the quantum calculations can be found alongside the
 # functions used to calculate corresponding properties.
-
 # Properties list
 
 properties = ["Time (s)", "Frequency (Hz)",
               "Energy (J)", "Wavelength (m)",
               "Wavenumber (m^-1)"]
+
+
 t = ""
 v = ""
 energy = ""
@@ -23,19 +24,24 @@ N = 6.022e23 # Avogadro's constant (mol^-1)
 F = 96485 # Faraday constant (C mol^-1)
 R = 8.314 # Ideal gas constant (JK^-1mol^-1)
 
-def quantum_calc():
-    if property_combo.get() == "Energy (J)":
-        energy_val = property_input.get()
-        energy_val/h = v
+def quantum_calc(val,choice):
+    global calculation_label, v, lam, wvn, t, energy, a
+    a = choice
+    if choice == "Energy (J)":
+        val = int(val)
+        energy_val = val
+        v = energy_val / h 
         print(v) # can later apply this to print to an output
-        c/v = lam
+        lam = c/v                                       
         print(lam) # can later apply this to print to an output
-        1/lam = wvn
+        wvn = 1/lam
         print(wvn) # can later apply this to print to an output
-        1/v = t        
+        t = 1/v         
         print(t) # can later apply this to print to an output
-    if property_combo.get() == "Time (s)":
-        time_val = property_input.get()
+        #calculation_label.configure(text = f"{v}\n{lam}\n{wvn}\n{t}")
+    elif choice == "Time (s)":
+        val = int(val)
+        time_val = val
         v = 1/time_val
         print(v) # can later apply this to print to an output
         energy = v*h
@@ -44,8 +50,9 @@ def quantum_calc():
         print(lam) # can later apply this to print to an output
         wvn = 1/lam
         print(wvn) # can later apply this to print to an output
-    if property_combo.get() == "Frequency (Hz)":
-        freq_val = property_input.get()
+    elif choice == "Frequency (Hz)":
+        val = int(val)
+        freq_val = val
         t = 1/freq_val
         print(t) # can later apply this to print to an output
         energy = h*freq_val
@@ -53,9 +60,10 @@ def quantum_calc():
         lam = c/freq_val
         print(lam) # can later apply this to print to an output
         wvn = 1/lam
-        print(lam) # can later apply this to print to an output
-    if property_combo.get() == "Wavelength (m)":
-        lam_val = property_input.get()
+        print(wvn) # can later apply this to print to an output
+    elif choice == "Wavelength (m)":
+        val = int(val)
+        lam_val = val
         wvn = 1/lam_val
         print(wvn) # can later apply this to print to an output
         v = c/lam_val
@@ -64,8 +72,9 @@ def quantum_calc():
         print(energy) # can later apply this to print to an output
         t = 1/v
         print(t) # can later apply this to print to an output
-    if property_combo.get() == "Wavenumber (m^-1)":
-        wvn_val = property_input.get()
+    elif choice == "Wavenumber (m^-1)":
+        val = int(val)
+        wvn_val = val
         lam = 1/wvn_val
         print(lam) # can later apply this to print to an output
         v = c/lam
@@ -74,3 +83,24 @@ def quantum_calc():
         print(energy) # can later apply this to print to an output
         t = 1/v
         print(t) # can later apply this to print to an output
+    else:
+        print("error")
+def configure_label(label):
+    global v, lam, wvn, t, energy, a
+    if a == "Energy (J)":
+        label.config(text=f"{v}\n{lam}\n{wvn}\n{t}")
+    elif a == "Time (s)":
+        label.config(text=f"{v}\n{energy}\n{wvn}\n{lam}")
+    elif a == "Frequency (Hz)":
+        label.config(text=f"{t}\n{energy}\n{wvn}\n{lam}")
+    elif a == "Wavelength (m)":
+        label.config(text=f"{wvn}\n{v}\n{energy}\n{t}")
+    elif a == "Wavenumber (m^-1)":
+        label.config(text=f"{v}\n{lam}\n{energy}\n{t}")
+
+
+#e  prints v,lam,wvn,t
+#t  prints v,energy,wvn,lam
+#f  prints t,energy,wvn,lam
+#w  prints wvn,v,energy,t
+#wn prints lam,v,energy,t
