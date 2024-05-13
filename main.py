@@ -1,14 +1,12 @@
-# *** Importing neccessary modules ***
-
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from lib.units import *
 from lib.quantum import *
 
-# *** Defining functions ***
+# *** Functions ***
 
-# ***** Function to auto-select corect units for unit type selected *****
+# Function to auto-select corect units for unit type selected
 def pick_option(e): # Event to bind to dropdown to select correct list
     if type_combo.get() == "Length":
         unit_combo.config(values=list(length_units.keys()))
@@ -27,7 +25,7 @@ def pick_option(e): # Event to bind to dropdown to select correct list
         unit_combo1.config(value=list(energy_units.keys()))
 
 # Calculation function to perform calculation and print answer to ouput entry
-def calculation():
+def calculation(): 
     try:
         value = user_input_box.get()
         value = float(value)
@@ -53,34 +51,39 @@ def calculation():
 
 # Prints reference text to a label above output entry
 def displaytext(x):
-    #print(text.get(x))
     example_label.config(text = text.get(x))
 
 # Clears output entry ready for a new calculation
 def clear():
     output.delete(0, END)
 
-# Allows input entry to be placed relative to combobox
-def get_combo_coords():
-    coords_of_combox, coords_of_comboy = unit_combo.winfo_x(), unit_combo.winfo_y()
-    print("Combo 1 coordinates:", coords_of_combox, coords_of_comboy)
-
-    # Place the entry box relative to the combo box
-    user_input_box.place(leftframe, x=coords_of_combox - 75, y=coords_of_comboy, width=50, height=20)
-
-# *** Initiate Root Window + Labels ***
+# Setting out the root window
 
 root = tk.Tk()
-root.geometry("600x400")
+root.geometry("800x450")
 root.title("Scientific Unit Converter - CW3")
 
-# Left frame
-leftframe = tk.Frame(root)
-leftframe.pack(side = TOP)
-# Right frame
-rightframe = tk.Frame(root)
-rightframe.pack(side = TOP, pady=20)
+notebook_1 = ttk.Notebook(root) # Notebook allows for separate tabs, breaking up the GUI
+notebook_1.pack(fill="both", expand=1)
 
+tabframe1 = tk.Frame(notebook_1)
+tabframe2 = tk.Frame(notebook_1)
+tabframe1.pack(fill="both", expand=1)
+tabframe2.pack(fill="both", expand=1)
+
+notebook_1.add(tabframe1, text="Unit Converter")
+notebook_1.add(tabframe2, text="Quantum Calculator")
+
+# ******************************************
+# *                                        *
+# *  Setting out the "Unit Converter" tab  *
+# *                                        *
+# ******************************************
+
+leftframe = tk.Frame(tabframe1)
+leftframe.pack(side = TOP)
+rightframe = tk.Frame(tabframe1)
+rightframe.pack(side = TOP)
 
 intro = tk.Label(leftframe,text="Scientific Unit Converter")
 intro.grid(row=1, column=2, pady=10)
@@ -88,23 +91,7 @@ intro.grid(row=1, column=2, pady=10)
 type_label = tk.Label(leftframe,text="Select a unit type")
 type_label.grid(row=2, column = 2)
 
-# Example text for the right frame
-example_label = tk.Label(rightframe)
-example_label.pack(padx = 100, pady= 0)
-
-text = {"Length":"Reference Lengths:\n\
-        Diameter of a hydrogen atom ≈ 106pm\n\
-        Circumference of a football ≈ 70cm\n\
-        Circumference of the earth ≈ 40,075km",
-        "Time":"Reference Times:\n\
-        Blink of an eye ≈ 100ms\n\
-        Time taken for light to travel from the Sun to the Earth ≈ 500s\n\
-        Half life of uranium 235 ≈ 7e8 years\n",
-        "Volume":"volume text",
-        "Pressure":"pressure text",
-        "Energy":"energy text"}
-
-# *** Sets dropdpown menus ***
+# *** Widgets for "Unit Converter" ***
 
 type_combo = ttk.Combobox(leftframe, value=unit_types)
 type_combo.grid(row=3, column=2)
@@ -134,17 +121,50 @@ output.pack()
 clear_but = tk.Button(rightframe, text="Clear", command=clear)
 clear_but.pack(pady=5)
 
-
-# Wait until the window is displayed to get the combo box coordinates
-root.after(100, get_combo_coords)
-
 calculate = tk.Button(
     leftframe,
-    text="Calculate",
+    text="Convert",
     width="10",
     height="2",
     command=lambda:[calculation(), displaytext(type_combo.get())]
 )
 calculate.grid(row=9, column=2, pady=5)
+
+# Example text for the right frame
+example_label = tk.Label(rightframe)
+example_label.pack(padx = 100, pady= 0)
+
+text = {"Length":"Reference Lengths:\n\
+        Diameter of a hydrogen atom ≈ 106pm\n\
+        Circumference of a football ≈ 70cm\n\
+        Circumference of the earth ≈ 40,075km",
+        "Time":"Reference Times:\n\
+        Blink of an eye ≈ 100ms\n\
+        Time taken for light to travel from the Sun to the Earth ≈ 500s\n\
+        Half life of uranium 235 ≈ 7e8 years\n",
+        "Volume":"volume text",
+        "Pressure":"pressure text",
+        "Energy":"energy text"}
+
+# **********************************************
+# *                                            *
+# *  Setting out the "Quantum Calculator" tab  *
+# *                                            *
+# **********************************************
+
+properties_label = tk.Label(tabframe2, text="Please select a property type and input its corresponding\n"
+                            "value in SI units.")
+properties_label.pack(pady=10)
+
+property_combo = ttk.Combobox(tabframe2, value=properties)
+property_combo.pack(pady=10)
+
+property_input = tk.Entry(tabframe2)
+property_input.pack(pady=10)
+
+quant_calculate = tk.Button(tabframe2,
+                            text="Calculate",
+                            command=lambda:[])
+quant_calculate.pack(pady=10)
 
 root.mainloop()
