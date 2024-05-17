@@ -1,18 +1,13 @@
-# In this file, all of the constants that are required
-# for the quantum calculations can be found alongside the
-# functions used to calculate corresponding properties.
-# Properties list
+"""
+In this file, all of the constants that are required
+for the quantum calculations can be found alongside the
+functions used to calculate corresponding properties.
+Properties list
+"""
 
 properties = ["Time (s)", "Frequency (Hz)",
               "Energy (J)", "Wavelength (m)",
               "Wavenumber (m^-1)"]
-
-
-t = ""
-v = ""
-energy = ""
-lam = ""
-wvn = ""
 
 # Constants
 
@@ -88,15 +83,15 @@ def quantum_calc(val,choice):
 def configure_label(label):
     global v, lam, wvn, t, energy, a
     if a == "Energy (J)":
-        label.config(text=f"{v}\n{lam}\n{wvn}\n{t}")
+        label.config(text=f"Frequency: {v}Hz\nWavelength: {lam}m\nWavenumber: {wvn}cm^-1\nTime: {t}s")
     elif a == "Time (s)":
-        label.config(text=f"{v}\n{energy}\n{wvn}\n{lam}")
+        label.config(text=f"Frequency: {v}Hz\nEnergy: {energy}J\nWavenumber: {wvn}cm^-1\nWavelength: {lam}m")
     elif a == "Frequency (Hz)":
-        label.config(text=f"{t}\n{energy}\n{wvn}\n{lam}")
+        label.config(text=f"Time: {t}s\nEnergy: {energy}J\nWavenumber: {wvn}cm^-1\nWavelength: {lam}m")
     elif a == "Wavelength (m)":
-        label.config(text=f"{wvn}\n{v}\n{energy}\n{t}")
+        label.config(text=f"Wavenumber: {wvn}cm^-1\nFrequency: {v}Hz\nEnergy: {energy}J\nTime: {t}s")
     elif a == "Wavenumber (m^-1)":
-        label.config(text=f"{v}\n{lam}\n{energy}\n{t}")
+        label.config(text=f"Frequency: {v}Hz\nWavelength: {lam}m\nEnergy: {energy}J\nTime: {t}s")
 
 
 #e  prints v,lam,wvn,t
