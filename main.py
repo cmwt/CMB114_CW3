@@ -1,10 +1,19 @@
+"""
+This file contains the main project for the Unit Converter software, setting the
+main functions along with the formatting of the GUI, with the capability to read
+in data from other files in the lib directory such as: 'quantum.py' and 'units.py'.
+"""
+
 import tkinter as tk
 from tkinter import ttk
-from tkinter import *
 from lib.units import *
 from lib.quantum import *
 
-# *** Functions ***
+# *******************
+# *                 *
+# *    Functions    *
+# *                 *
+# *******************
 
 # Function to auto-select corect units for unit type selected
 def pick_option(e): # Event to bind to dropdown to select correct list
@@ -55,12 +64,16 @@ def displaytext(x):
 
 # Clears output entry ready for a new calculation
 def clear():
-    output.delete(0, END)
+    output.delete(0, tk.END)
+
+# Clears quantum output label
+def clear_quant():
+    calculation_label.configure(text="")
 
 # Setting out the root window
 
 root = tk.Tk()
-root.geometry("800x450")
+root.geometry("800x500")
 root.title("Scientific Unit Converter - CW3")
 
 notebook_1 = ttk.Notebook(root) # Notebook allows for separate tabs, breaking up the GUI
@@ -81,9 +94,9 @@ notebook_1.add(tabframe2, text="Quantum Calculator")
 # ******************************************
 
 leftframe = tk.Frame(tabframe1)
-leftframe.pack(side = TOP)
+leftframe.pack(side = tk.TOP)
 rightframe = tk.Frame(tabframe1)
-rightframe.pack(side = TOP)
+rightframe.pack(side = tk.TOP)
 
 intro = tk.Label(leftframe,text="Scientific Unit Converter")
 intro.grid(row=1, column=2, pady=10)
@@ -142,15 +155,25 @@ text = {"Length":"Reference Lengths:\n\
         Blink of an eye ≈ 100ms\n\
         Time taken for light to travel from the Sun to the Earth ≈ 500s\n\
         Half life of uranium 235 ≈ 7e8 years\n",
-        "Volume":"volume text",
-        "Pressure":"pressure text",
-        "Energy":"energy text"}
+        "Volume":"Reference Volumes:\n\
+        Volume of the Earth: 1.086 trillion km^3\n\
+        Volume of an average bathtub: 302 litres\n\
+        Volume of an average coffee: 240ml",
+        "Pressure":"Reference Pressures:\n\
+        Average tire pressure on a car: 33psi\n\
+        Pressure to cause a diamond to break: 3000MPa\n\
+        Pressure of the average boiler: 1.3 Bar",
+        "Energy":"Reference Energies:\n\
+        Energy released upon hydration of an alkene: 10kcal/mol\n\
+        Energy released from the Fat Man bomb: 88 TJ\n\
+        Calories burnt on a 5K run: ~350kcal"}
 
 # **********************************************
 # *                                            *
 # *  Setting out the "Quantum Calculator" tab  *
 # *                                            *
 # **********************************************
+
 global calculation_label
 properties_label = tk.Label(tabframe2, text="Please select a property type and input its corresponding\n"
                             "value in SI units.")
@@ -168,5 +191,8 @@ quant_calculate = tk.Button(tabframe2,
                             text="Calculate",
                             command=lambda: [quantum_calc(property_input.get(), property_combo.get()), configure_label(calculation_label)])
 quant_calculate.pack(pady=10)
+
+quant_clear = tk.Button(tabframe2, text="Clear", command=clear_quant)
+quant_clear.pack(pady=5)
 
 root.mainloop()
