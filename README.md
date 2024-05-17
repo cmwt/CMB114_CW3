@@ -8,9 +8,7 @@ ability to convert between a selection of SI and non-SI units that relate to the
 
 # Running Unit Converter
 
-The user will need to install the latest version of Python on their computer and tick the 
-'Add Python 3.xx to PATH' option so that any packages required to run the GUI can be
-installed to your system. The python download links can be found at:
+The user will need to install the latest version of Python on their computer. The python download links can be found at:
 
 https://www.python.org/downloads/
 
@@ -20,17 +18,23 @@ download available from the following link:
 https://git-scm.com/downloads
 
 Once this has downloaded, open Git CMD, navigate to the directory within which the user would like to clone 
-the repository then run 'git clone https://github.com/cmwt/CMB114_CW3' and hit enter. 
+the repository then run:
 
-To run the GUI, navigate to the CMB114_CW3 directory that has just been cloned in and type 'python main.py'.
-If the user would like to run the CLI version, type 'python main_cli.py'. 
+`git clone https://github.com/cmwt/CMB114_CW3`
+
+To run the GUI, navigate to the CMB114_CW3 directory that has just been cloned in and type:
+
+`python main.py`
+
+If the user would like to run the CLI version, type:
+
+`python main_cli.py`
 
 # Guide to Unit Converter
 
-Set up in the top frame of the GUI is the settings of the unit converter in which the unit type can 
-be altered along with the unit of measure. When the calculate button is clicked, the conversion is displayed 
-in the output entry on the right-hand frame of the GUI, underneath some general reference information 
-regarding that unit type. 
+There are two sections to the Unit Converter GUI, a simple unit converter, and a quantum calculator. 
 
-The CLI is slightly different. When the user runs the CLI, there will be a main menu with a numbered list of 
-options from which the user can select and follow the on-screen instructions to use the unit converter. 
+Within the 'Unit Converter' tb, the user can select the unit type for which they would like to run a conversion for and then set which units they would like to convert between. The 'Convert' button then outputs the converted value in an entry, and prints some reference measurements for each of the unit types to provide some real-world context to the user, for the conversions they are running. 
+
+The 'Quantum Calculator' tab allows the user to input a quantum property and the 'Calculate' button will output the associated quantum properties such as energy, wavelength, etc. 
+This can be used in conjunction with the unit converter to assist the user with any calculations they have to do when working in the field of quantum chemistry. 
