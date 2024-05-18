@@ -38,3 +38,5 @@ Within the 'Unit Converter' tb, the user can select the unit type for which they
 
 The 'Quantum Calculator' tab allows the user to input a quantum property and the 'Calculate' button will output the associated quantum properties such as energy, wavelength, etc. 
 This can be used in conjunction with the unit converter to assist the user with any calculations they have to do when working in the field of quantum chemistry. 
+
+The CLI version of the application has the same functionality, the difference being the user has to run it from Command Prompt (on Windows), Terminal (on MacOS or Linux).
