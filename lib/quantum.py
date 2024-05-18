@@ -8,8 +8,9 @@ Properties list
 properties = ["Time (s)", "Frequency (Hz)",
               "Energy (J)", "Wavelength (m)",
               "Wavenumber (m^-1)"]
-
-# Constants
+"""
+Constants
+"""
 
 h = 6.626e-34 # Planck constant (Js)
 c = 2.997e8 # Speed of light (m/s)
@@ -26,60 +27,60 @@ def quantum_calc(val,choice):
         val = int(val)
         energy_val = val
         v = energy_val / h 
-        print(v) # can later apply this to print to an output
+        print(f"Frequency: {v} Hz")
         lam = c/v                                       
-        print(lam) # can later apply this to print to an output
+        print(f"Wavelength: {lam} m")
         wvn = 1/lam
-        print(wvn) # can later apply this to print to an output
+        print(f"Wavenumber: {wvn} cm^-1")
         t = 1/v         
-        print(t) # can later apply this to print to an output
-        #calculation_label.configure(text = f"{v}\n{lam}\n{wvn}\n{t}")
+        print(f"Time: {t} s")
     elif choice == "Time (s)":
         val = int(val)
         time_val = val
         v = 1/time_val
-        print(v) # can later apply this to print to an output
+        print(f"Frequency: {v} Hz") 
         energy = v*h
-        print(energy) # can later apply this to print to an output
+        print(f"Energy: {energy} J")
         lam = c/v
-        print(lam) # can later apply this to print to an output
+        print(f"Wavelength: {lam} m")
         wvn = 1/lam
-        print(wvn) # can later apply this to print to an output
+        print(f"Wavenumber: {wvn} cm^-1")
     elif choice == "Frequency (Hz)":
         val = int(val)
         freq_val = val
         t = 1/freq_val
-        print(t) # can later apply this to print to an output
+        print(f"Time: {t} s")
         energy = h*freq_val
-        print(energy) # can later apply this to print to an output
+        print(f"Energy: {energy} J")
         lam = c/freq_val
-        print(lam) # can later apply this to print to an output
+        print(f"Wavelength: {lam} m")
         wvn = 1/lam
-        print(wvn) # can later apply this to print to an output
+        print(f"Wavenumber: {wvn} cm^-1")
     elif choice == "Wavelength (m)":
         val = int(val)
         lam_val = val
         wvn = 1/lam_val
-        print(wvn) # can later apply this to print to an output
+        print(f"Wavenumber: {wvn} cm^-1")
         v = c/lam_val
-        print(v) # can later apply this to print to an output
+        print(f"Frequency: {v} Hz") 
         energy = h*v
-        print(energy) # can later apply this to print to an output
+        print(f"Energy: {energy} J") 
         t = 1/v
-        print(t) # can later apply this to print to an output
+        print(f"Time: {t} s")
     elif choice == "Wavenumber (m^-1)":
         val = int(val)
         wvn_val = val
         lam = 1/wvn_val
-        print(lam) # can later apply this to print to an output
+        print(f"Wavelength: {lam} m")
         v = c/lam
-        print(v) # can later apply this to print to an output
+        print(f"Frequency: {v} Hz") 
         energy = h*v
-        print(energy) # can later apply this to print to an output
+        print(f"Energy: {energy} J")
         t = 1/v
-        print(t) # can later apply this to print to an output
+        print(f"Time: {t} s") 
     else:
         print("error")
+
 def configure_label(label):
     global v, lam, wvn, t, energy, a
     if a == "Energy (J)":
@@ -92,10 +93,3 @@ def configure_label(label):
         label.config(text=f"Wavenumber: {wvn}cm^-1\nFrequency: {v}Hz\nEnergy: {energy}J\nTime: {t}s")
     elif a == "Wavenumber (m^-1)":
         label.config(text=f"Frequency: {v}Hz\nWavelength: {lam}m\nEnergy: {energy}J\nTime: {t}s")
-
-
-#e  prints v,lam,wvn,t
-#t  prints v,energy,wvn,lam
-#f  prints t,energy,wvn,lam
-#w  prints wvn,v,energy,t
-#wn prints lam,v,energy,t
