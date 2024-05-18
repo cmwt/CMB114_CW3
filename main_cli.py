@@ -37,7 +37,7 @@ def run_choice(x):
         unit = energy_units
     elif x ==6:
         property_type =  int(input("Please select a property type and input its corresponding value in SI units\
-\n1-Time(s)\n2-Frequency(Hz)\n3-Energy(J)\n4-Wavelength(m)\n5-Wavenumber(m^-1)"))
+\n1-Time(s)\n2-Frequency(Hz)\n3-Energy(J)\n4-Wavelength(m)\n5-Wavenumber(m^-1)\n"))
         if 0 < property_type < 6: 
             quantum_calculator(property_type)
         else:
@@ -68,12 +68,12 @@ def run_choice(x):
         opening_options()
     while True:
         try:
-            input_value = int(input(f"What is the value in {list(unit)[starting_unit-1]}"))
+            input_value = float(input(f"What is the value in {list(unit)[starting_unit-1]}?\n"))
             break
         except ValueError:
-            print('You entered a non-integer value, try again.')
+            print('You entered an invalid value, try again.')
             continue
-    print("What unit do you want to convert this to?")
+    print("What unit do you want to convert this to? select from the list above.")
     while True:
         try:
             end_unit = int(input())
@@ -92,7 +92,7 @@ def run_choice(x):
 
 def quantum_calculator(x):
     global unit
-    val = int(input("Enter the value"))
+    val = int(input("Enter the value: "))
     if x == 1:
         quantum_calc(val, "Time (s)")
     elif x == 2:
