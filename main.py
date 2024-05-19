@@ -1,13 +1,11 @@
-"""
-This file contains the main project for the Unit Converter software, setting the
-main functions along with the formatting of the GUI, with the capability to read
-in data from other files in the lib directory such as: 'quantum.py' and 'units.py'.
-"""
-
 import tkinter as tk
+from tkinter import *
 from tkinter import ttk
+from tkinter.ttk import *
 from lib.units import *
 from lib.quantum import *
+import os
+from PIL import Image, ImageTk
 
 # *******************
 # *                 *
@@ -15,7 +13,6 @@ from lib.quantum import *
 # *                 *
 # *******************
 
-# Function to auto-select corect units for unit type selected
 def pick_option(e): # Event to bind to dropdown to select correct list
     if type_combo.get() == "Length":
         unit_combo.config(values=list(length_units.keys()))
@@ -33,7 +30,6 @@ def pick_option(e): # Event to bind to dropdown to select correct list
         unit_combo.config(value=list(energy_units.keys()))
         unit_combo1.config(value=list(energy_units.keys()))
 
-# Calculation function to perform calculation and print answer to ouput entry
 def calculation(): 
     try:
         value = user_input_box.get()
@@ -58,29 +54,38 @@ def calculation():
     except ValueError:
         output.insert(0, "Invalid. Enter a number.")
 
-# Prints reference text to a label above output entry
 def displaytext(x):
     example_label.config(text = text.get(x))
 
-# Clears output entry ready for a new calculation
 def clear():
     output.delete(0, tk.END)
+#this clears the output label for the unit converter
 
-# Clears quantum output label
 def clear_quant():
     calculation_label.configure(text="")
-
+#this clears the output label for the quantum calculator
 # Setting out the root window
 
 root = tk.Tk()
 root.geometry("800x500")
 root.title("Scientific Unit Converter - CW3")
+root.configure(bg="#f0f0f0")
 
-notebook_1 = ttk.Notebook(root) # Notebook allows for separate tabs, breaking up the GUI
+# Applying styles
+#ttk.style is a class that can be used to have consistent
+#visual elements to all of the widgets
+style = ttk.Style()
+#these define the style which will be used for all 
+style.configure("TLabel", font=("Helvetica", 10), background="#f0f0f0")
+style.configure("TButton", font=("Helvetica", 10))
+style.configure("TCombobox", font=("Helvetica", 10))
+style.configure("TEntry", font=("Helvetica", 10))
+
+notebook_1 = ttk.Notebook(root)
 notebook_1.pack(fill="both", expand=1)
 
-tabframe1 = tk.Frame(notebook_1)
-tabframe2 = tk.Frame(notebook_1)
+tabframe1 = tk.Frame(notebook_1, bg="#f0f0f0")
+tabframe2 = tk.Frame(notebook_1, bg="#f0f0f0")
 tabframe1.pack(fill="both", expand=1)
 tabframe2.pack(fill="both", expand=1)
 
@@ -93,80 +98,73 @@ notebook_1.add(tabframe2, text="Quantum Calculator")
 # *                                        *
 # ******************************************
 
-leftframe = tk.Frame(tabframe1)
-leftframe.pack(side = tk.TOP)
-rightframe = tk.Frame(tabframe1)
-rightframe.pack(side = tk.TOP)
+leftframe = tk.Frame(tabframe1, bg="#f0f0f0")
+leftframe.pack(side=tk.LEFT, padx=20, pady=20)
+rightframe = tk.Frame(tabframe1, bg="#f0f0f0")
+rightframe.pack(side=tk.RIGHT, padx=20, pady=20)
 
-intro = tk.Label(leftframe,text="Scientific Unit Converter")
-intro.grid(row=1, column=2, pady=10)
+intro = ttk.Label(leftframe, text="Scientific Unit Converter", font=("Helvetica", 16))
+intro.grid(row=0, column=0, columnspan=2, pady=10)
 
-type_label = tk.Label(leftframe,text="Select a unit type")
-type_label.grid(row=2, column = 2)
+type_label = ttk.Label(leftframe, text="Select a unit type:")
+type_label.grid(row=1, column=0, pady=5, sticky="e")
 
-# *** Widgets for "Unit Converter" ***
-
-type_combo = ttk.Combobox(leftframe, value=unit_types)
-type_combo.grid(row=3, column=2)
+type_combo = ttk.Combobox(leftframe, value=unit_types, width=25)
+type_combo.grid(row=1, column=1, pady=5, sticky="w")
 type_combo.bind("<<ComboboxSelected>>", pick_option)
-unit_label = tk.Label(leftframe, 
-    text="Select the units between which you would \nlike to convert.")
-unit_label.grid(row=4, column=2, pady=5)
 
-from_label = tk.Label(leftframe, text="From:")
-from_label.grid(row=5, column=1)
-unit_combo = ttk.Combobox(leftframe, value=[" "])
-unit_combo.grid(row=6, column=1)
+unit_label = ttk.Label(leftframe, text="Select the units between which you would like to convert:")
+unit_label.grid(row=2, column=0, columnspan=2, pady=5)
 
-to_label = tk.Label(leftframe, text="To:")
-to_label.grid(row=5, column=3)
-unit_combo1 = ttk.Combobox(leftframe, value=[" "])
-unit_combo1.grid(row=6, column = 3)
+from_label = ttk.Label(leftframe, text="From:")
+from_label.grid(row=3, column=0, pady=5, sticky="e")
 
-entry_label = tk.Label(leftframe, text="Enter a number")
-entry_label.grid(row=7, column=2)
-user_input_box = tk.Entry(leftframe)
-user_input_box.grid(row=8, column=2)
+unit_combo = ttk.Combobox(leftframe, value=[" "], width=25)
+unit_combo.grid(row=3, column=1, pady=5, sticky="w")
 
-output = tk.Entry(rightframe)
-output.pack()
+to_label = ttk.Label(leftframe, text="To:")
+to_label.grid(row=4, column=0, pady=5, sticky="e")
 
-clear_but = tk.Button(rightframe, text="Clear", command=clear)
+unit_combo1 = ttk.Combobox(leftframe, value=[" "], width=25)
+unit_combo1.grid(row=4, column=1, pady=5, sticky="w")
+
+entry_label = ttk.Label(leftframe, text="Enter value:")
+entry_label.grid(row=5, column=0, pady=5, sticky="e")
+
+user_input_box = ttk.Entry(leftframe, width=27)
+user_input_box.grid(row=5, column=1, pady=5, sticky="w")
+
+output = ttk.Entry(rightframe, width=40)
+output.pack(pady=10)
+
+clear_but = ttk.Button(rightframe, text="Clear", command=clear)
 clear_but.pack(pady=5)
 
-calculate = tk.Button(
+# Load and resize the image for the calculate button using Pillow
+directory = os.getcwd()
+image_path = os.path.join(directory, "lib", "button_convert.png")
+image = Image.open(image_path)
+image = image.resize((100, 35), Image.ANTIALIAS)
+photo = ImageTk.PhotoImage(image)
+
+calculate = ttk.Button(
     leftframe,
-    text="Convert",
-    width="10",
-    height="2",
-    command=lambda:[calculation(), displaytext(type_combo.get())]
+    image=photo,
+    command=lambda: [calculation(), displaytext(type_combo.get())]
 )
-calculate.grid(row=9, column=2, pady=5)
+calculate.grid(row=6, column=0, columnspan=2, pady=10)
+calculate.image = photo
 
-# Example text for the right frame
-example_label = tk.Label(rightframe)
-example_label.pack(padx = 100, pady= 0)
+example_label = ttk.Label(rightframe)
+example_label.pack(pady=10)
 
-text = {"Length":"Reference Lengths:\n\
-        Diameter of a hydrogen atom ≈ 106pm\n\
-        Circumference of a football ≈ 70cm\n\
-        Circumference of the earth ≈ 40,075km",
-        "Time":"Reference Times:\n\
-        Blink of an eye ≈ 100ms\n\
-        Time taken for light to travel from the Sun to the Earth ≈ 500s\n\
-        Half life of uranium 235 ≈ 7e8 years\n",
-        "Volume":"Reference Volumes:\n\
-        Volume of the Earth: 1.086 trillion km^3\n\
-        Volume of an average bathtub: 302 litres\n\
-        Volume of an average coffee: 240ml",
-        "Pressure":"Reference Pressures:\n\
-        Average tire pressure on a car: 33psi\n\
-        Pressure to cause a diamond to break: 3000MPa\n\
-        Pressure of the average boiler: 1.3 Bar",
-        "Energy":"Reference Energies:\n\
-        Energy released upon hydration of an alkene: 10kcal/mol\n\
-        Energy released from the Fat Man bomb: 88 TJ\n\
-        Calories burnt on a 5K run: ~350kcal"}
+text = {
+    "Length": "Reference Lengths:\nDiameter of a hydrogen atom ≈ 106pm\nCircumference of a football ≈ 70cm\nCircumference of the earth ≈ 40,075km",
+    "Time": "Reference Times:\nBlink of an eye ≈ 100ms\nTime taken for light to travel from the Sun to the Earth ≈ 500s\nHalf life of uranium 235 ≈ 7e8 years",
+    "Volume": "Reference Volumes:\nVolume of the Earth: 1.086 trillion km^3\nVolume of an average bathtub: 302 litres\nVolume of an average coffee: 240ml",
+    "Pressure": "Reference Pressures:\nAverage tire pressure on a car: 33psi\nPressure to cause a diamond to break: 3000MPa\nPressure of the average boiler: 1.3 Bar",
+    "Energy": "Reference Energies:\nEnergy released upon hydration of an alkene: 10kcal/mol\nEnergy released from the Fat Man bomb: 88 TJ\nCalories burnt on a 5K run: ~350kcal"
+}
 
 # **********************************************
 # *                                            *
@@ -174,25 +172,25 @@ text = {"Length":"Reference Lengths:\n\
 # *                                            *
 # **********************************************
 
-global calculation_label
-properties_label = tk.Label(tabframe2, text="Please select a property type and input its corresponding\n"
-                            "value in SI units.")
+properties_label = ttk.Label(tabframe2, text="Please select a property type and input its corresponding value in SI units.")
 properties_label.pack(pady=10)
 
-property_combo = ttk.Combobox(tabframe2, value=properties)
+property_combo = ttk.Combobox(tabframe2, value=properties, width=40)
 property_combo.pack(pady=10)
 
-property_input = tk.Entry(tabframe2)
+property_input = ttk.Entry(tabframe2, width=42)
 property_input.pack(pady=10)
 
-calculation_label = tk.Label(tabframe2, text="")
+calculation_label = ttk.Label(tabframe2, text="")
 calculation_label.pack(pady=10)
-quant_calculate = tk.Button(tabframe2,
-                            text="Calculate",
+
+quant_calculate = ttk.Button(tabframe2,
+                            image=photo,
                             command=lambda: [quantum_calc(property_input.get(), property_combo.get()), configure_label(calculation_label)])
+quant_calculate.image = photo
 quant_calculate.pack(pady=10)
 
-quant_clear = tk.Button(tabframe2, text="Clear", command=clear_quant)
+quant_clear = ttk.Button(tabframe2, text="Clear", command=clear_quant)
 quant_clear.pack(pady=5)
 
 root.mainloop()
