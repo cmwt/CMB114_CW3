@@ -144,7 +144,7 @@ clear_but.pack(pady=5)
 directory = os.getcwd()
 image_path = os.path.join(directory, "lib", "button_convert.png")
 image = Image.open(image_path)
-image = image.resize((100, 35), Image.ANTIALIAS)
+image = image.resize((100, 35))
 photo = ImageTk.PhotoImage(image)
 
 calculate = ttk.Button(
