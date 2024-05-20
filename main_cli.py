@@ -92,7 +92,7 @@ def run_choice(x):
 
 def quantum_calculator(x):
     global unit
-    val = int(input("Enter the value: "))
+    val = float(input("Enter the value: "))
     if x == 1:
         quantum_calc(val, "Time (s)")
     elif x == 2:
