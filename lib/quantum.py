@@ -23,8 +23,8 @@ R = 8.314 # Ideal gas constant (JK^-1mol^-1)
 def quantum_calc(val,choice):
     global calculation_label, v, lam, wvn, t, energy, a
     a = choice
+    val = float(val)
     if choice == "Energy (J)":
-        val = int(val)
         energy_val = val
         v = energy_val / h 
         print(f"Frequency: {v} Hz")
@@ -35,7 +35,6 @@ def quantum_calc(val,choice):
         t = 1/v         
         print(f"Time: {t} s")
     elif choice == "Time (s)":
-        val = int(val)
         time_val = val
         v = 1/time_val
         print(f"Frequency: {v} Hz") 
@@ -46,7 +45,6 @@ def quantum_calc(val,choice):
         wvn = 1/lam
         print(f"Wavenumber: {wvn} cm^-1")
     elif choice == "Frequency (Hz)":
-        val = int(val)
         freq_val = val
         t = 1/freq_val
         print(f"Time: {t} s")
@@ -57,7 +55,6 @@ def quantum_calc(val,choice):
         wvn = 1/lam
         print(f"Wavenumber: {wvn} cm^-1")
     elif choice == "Wavelength (m)":
-        val = int(val)
         lam_val = val
         wvn = 1/lam_val
         print(f"Wavenumber: {wvn} cm^-1")
@@ -68,7 +65,6 @@ def quantum_calc(val,choice):
         t = 1/v
         print(f"Time: {t} s")
     elif choice == "Wavenumber (m^-1)":
-        val = int(val)
         wvn_val = val
         lam = 1/wvn_val
         print(f"Wavelength: {lam} m")
