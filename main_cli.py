@@ -98,23 +98,32 @@ def run_choice(x):
 
 def quantum_calculator(x):
     global unit
-    val = float(input("Enter the value: "))
-    if isinstance(val,str)== True:
-        print("error in input")
+    try:
+        val = float(input("Enter the value: "))
+    except ValueError:
+        print("Error in input. Please enter a numerical value.")
         quantum_calculator(x)
+        return
     if x == 1:
         quantum_calc(val, "Time (s)")
+        print("\nReturning to the menu")
+        opening_options() 
     elif x == 2:
         quantum_calc(val, "Frequency (Hz)")
+        print("\nReturning to the menu")
+        opening_options() 
     elif x == 3:
         quantum_calc(val, "Energy (J)")
+        print("\nReturning to the menu")
+        opening_options() 
     elif x == 4:
         quantum_calc(val, "Wavelength (m)")
+        print("\nReturning to the menu")
+        opening_options() 
     elif x == 5:
         quantum_calc(val, "Wavenumber (m^-1)")
-    print("\nReturning to the menu")
-    opening_options()
-        
+        print("\nReturning to the menu")
+        opening_options() 
     
 
 def conversion(a,b,c):
