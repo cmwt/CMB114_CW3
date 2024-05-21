@@ -36,17 +36,19 @@ def run_choice(x):
     elif x == 5:
         unit = energy_units
     elif x ==6:
-        property_type =  int(input("Please select a property type and input its corresponding value in SI units\
+        while True:
+            try:
+                property_type =  int(input("Please select a property type and input its corresponding value in SI units\
 \n1-Time(s)\n2-Frequency(Hz)\n3-Energy(J)\n4-Wavelength(m)\n5-Wavenumber(m^-1)\n"))
-        try:
-            if 0 < property_type < 6: 
-                quantum_calculator(property_type)
-            else:
-                print("invalid entry")
+                if 0 < property_type < 6: 
+                    break
+                else:
+                    print("invalid entry")
+                    run_choice(6)
+            except:
+                print("You have entered a non integer characeter")
                 run_choice(6)
-        except:
-            print("You have entered a non integer characeter\nReturning to the opening menu")
-            opening_options()
+        quantum_calculator(property_type)
     elif x ==7:
         about()
     else:
