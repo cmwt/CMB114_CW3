@@ -20,7 +20,7 @@ https://git-scm.com/downloads
 Once this has downloaded, open Git CMD, navigate to the directory within which the user would like to clone 
 the repository then run:
 
-`git clone https://github.com/cmwt/CMB114_CW3`
+`git clone https://github.com/cmwt/CMB114_CW3.git`
 
 To run the GUI, navigate to the CMB114_CW3 directory that has just been cloned in and type:
 
@@ -34,9 +34,13 @@ If the user would like to run the CLI version, type:
 
 There are two sections to the Unit Converter GUI, a simple unit converter, and a quantum calculator. 
 
-Within the 'Unit Converter' tb, the user can select the unit type for which they would like to run a conversion for and then set which units they would like to convert between. The 'Convert' button then outputs the converted value in an entry, and prints some reference measurements for each of the unit types to provide some real-world context to the user, for the conversions they are running. 
+Within the 'Unit Converter' tab, the user can select the unit type for which they would like to run a conversion for and then set which units they would like to convert between. The 'Convert' button then outputs the converted value in an entry, and prints some reference measurements for each of the unit types to provide some real-world context to the user, for the conversions they are running. 
 
 The 'Quantum Calculator' tab allows the user to input a quantum property and the 'Calculate' button will output the associated quantum properties such as energy, wavelength, etc. 
 This can be used in conjunction with the unit converter to assist the user with any calculations they have to do when working in the field of quantum chemistry. 
 
 The CLI version of the application has the same functionality, the difference being the user has to run it from Command Prompt (on Windows), Terminal (on MacOS or Linux).
+
+# Tutorials and Testing
+
+For information regarding specific tutorials of the features of this application and the testing of the software, please see the 'CMB114_CW3_Tutorials_and_Testing.docx' file in the 'docs' directory. 
