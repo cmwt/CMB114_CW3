@@ -99,6 +99,9 @@ def run_choice(x):
 def quantum_calculator(x):
     global unit
     val = float(input("Enter the value: "))
+    if isinstance(val,str)== True:
+        print("error in input")
+        quantum_calculator(x)
     if x == 1:
         quantum_calc(val, "Time (s)")
     elif x == 2:
