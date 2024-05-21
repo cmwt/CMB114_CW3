@@ -43,7 +43,7 @@ def run_choice(x):
                 if 0 < property_type < 6: 
                     break
                 else:
-                    print("invalid entry")
+                    print("Choose a value between 1 and 5")
                     run_choice(6)
             except:
                 print("You have entered a non integer characeter")
